@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Example: Change event on a select</title>
+    <title>防抖节流</title>
     <style>
         body {
             display: flex;
@@ -38,7 +38,7 @@
                 timeout = setTimeout(() => {
                     fn.apply(this, rest)
                     timeout = null
-                }, timeout);
+                }, wait);
             }
         }
 
@@ -66,19 +66,18 @@
         function debounce(fn, wait) {
             let timeout = null;
             return function(...rest) {
-                let context = this;
                 if (timeout) {
                     clearTimeout(timeout);
                 }
                 timeout = setTimeout(function() {
-                    fn.apply(context, rest);
+                    fn.apply(this, rest);
                 }, wait);
 
             };
         }
-        const onInput = throttle_3(function(e) {
+        const onInput = debounce(function(e) {
             sum(e.target.value, 1, 19)
-        }, 1000)
+        }, 500)
     </script>
 </head>
 
