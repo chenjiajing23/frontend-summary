@@ -1,0 +1,32 @@
+{
+  "name": "frontend-summary",
+  "version": "1.0.0",
+  "description": "个人前端总结",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel JS/web-worker/index.html --out-dir JS/web-worker/dist",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gc": "git-cz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenjiajing23/frontend-summary.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chenjiajing23/frontend-summary/issues"
+  },
+  "homepage": "https://github.com/chenjiajing23/frontend-summary#readme",
+  "devDependencies": {
+    "commitizen": "^4.1.2",
+    "parcel": "^1.12.4",
+    "@commitlint/config-conventional": "^9.1.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  }
+}
