@@ -1,0 +1,88 @@
+<html>
+
+<head>
+    <title>防抖节流</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <script type="text/javascript">
+        function sum(value, a, b) {
+            console.log('输入的值为:', value, 'sum=', a + b);
+        }
+
+        // 节流,事件触发的n内只会执行一次
+        // 鼠标不断点击触发，mousedown(单位时间内只触发一次)
+        // 监听滚动事件，比如是否滑到底部自动加载更多，用throttle来判断
+        // 写法一
+        function throttle(fn, wait) {
+            let canRun = true // 通过闭包创建一个 标记是否可以运行函数
+            return function(...rest) {
+                if (!canRun) return // 如果不能运行，直接退出
+                canRun = false // 可以运行，重置
+                setTimeout(() => {
+                    fn.apply(this, rest)
+                    canRun = true
+                }, wait);
+            }
+        }
+
+        // 写法二
+        function throttle_2(fn, wait) {
+            let timeout = null
+            return function(...rest) {
+                if (timeout) return false
+                timeout = setTimeout(() => {
+                    fn.apply(this, rest)
+                    timeout = null
+                }, wait);
+            }
+        }
+
+        // 写法三
+        function throttle_3(fun, delay) {
+            let last, deferTimer
+            return function(...args) {
+                let now = +new Date()
+                if (last && now - last < delay) {
+                    deferTimer && clearTimeout(deferTimer)
+                    deferTimer = setTimeout(() => {
+                        last = now
+                        fun.apply(this, args)
+                    }, delay)
+                } else {
+                    last = now
+                    fun.apply(this, args)
+                }
+            }
+        }
+
+        //  在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时。
+        // search搜索联想，用户在不断输入值时，用防抖来节约请求资源。
+        // window触发resize的时候，不断的调整浏览器窗口大小会不断的触发这个事件，用防抖来让其只触发一次
+        function debounce(fn, wait) {
+            let timeout = null;
+            return function(...rest) {
+                if (timeout) {
+                    clearTimeout(timeout);
+                }
+                timeout = setTimeout(function() {
+                    fn.apply(this, rest);
+                }, wait);
+
+            };
+        }
+        const onInput = debounce(function(e) {
+            sum(e.target.value, 1, 19)
+        }, 500)
+    </script>
+</head>
+
+<body>
+    <input size="1" oninput="onInput(event);" style="width: 400px;height: 30px;" />
+</body>
+
+</html>

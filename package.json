@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "dev": "parcel JS/web-worker/index.html --out-dir JS/web-worker/dist",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "gc": "git-cz"
   },
   "repository": {

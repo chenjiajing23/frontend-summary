@@ -1,0 +1,86 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        
+        .content {
+            height: 100%;
+            width: 100%;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            text-align: center;
+        }
+        
+        img {
+            display: block;
+            margin: 0 auto 50px auto;
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content" class="content">
+        <img src="" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+        <img src="" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+        <img src="" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+        <img src="" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+        <img src="" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+        <img src="" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+        <img src="" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+        <img src="" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+        <img src="" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+        <img src="" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+        <img src="" data-src="http://m.imeitou.com/uploads/allimg/2016063018/hub1pbmwem5.jpg" alt="">
+    </div>
+    <script>
+        // 节流
+        function throttle(fn, wait = 300) {
+            let timeout = null
+            return function(...rest) {
+                if (timeout) return false
+                timeout = setTimeout(() => {
+                    fn.apply(this, rest)
+                    timeout = null
+                }, wait);
+            }
+        }
+        const el = document.getElementById('content')
+        let num = document.getElementsByTagName('img').length;
+        let img = document.getElementsByTagName("img");
+        let n = 0; //存储图片加载到的位置，避免每次都从第一张图片开始遍历
+
+        lazyload(el); //页面载入完毕加载可是区域内的图片
+
+        el.onscroll = throttle(function(e) {
+            lazyload(el)
+        }, 500)
+
+        function lazyload(el) {
+            if (el) {
+                try {
+                    let seeHeight = el.clientHeight; //可见区域高度
+                    let scrollTop = el.scrollTop; //滚动条距离顶部高度
+                    for (let i = n; i < num; i++) {
+                        if (img[i].offsetTop < seeHeight + scrollTop) {
+                            if (img[i].getAttribute("src") == "") {
+                                img[i].src = img[i].getAttribute("data-src");
+                            }
+                            n = i + 1;
+                        }
+                    }
+                } catch (error) {
+                    console.error(error)
+                }
+            } else {
+                console.error('请传入滚动的父元素dom')
+                return
+            }
+        }
+    </script>
+
+</body>
