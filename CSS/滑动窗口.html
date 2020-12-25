@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    nav {
+      padding: 20px;
+      background-color: lightgrey;
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      margin-right: 50px;
+      cursor: pointer;
+    }
+
+    .market {
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: lightcoral;
+      transition: 0.5s;
+      will-change: width;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="market"></div>
+    <a>聊天</a>
+    <a>聊天2</a>
+    <a>聊天3</a>
+    <a>聊4</a>
+    <a>聊天5</a>
+    <a>聊天6</a>
+  </nav>
+  </div>
+  <script>
+    const market = document.querySelector('.market');
+    const nav = document.querySelector('nav');
+    nav.addEventListener('click', (e) => {
+      if (e.target !== nav) {
+        const { offsetLeft, offsetWidth } = e.target;
+        market.style.left = offsetLeft + 'px';
+        market.style.width = offsetWidth + 'px';
+        console.log(offsetLeft, offsetWidth);
+      }
+    });
+  </script>
+</body>
+
+</html>
