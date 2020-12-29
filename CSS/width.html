@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    #parent {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      border: 10px solid black;
+      padding: 10px;
+      overflow: scroll;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="parent">
+    <div id="son"></div>
+  </div>
+  <script>
+    var clientWidth = window.document.getElementById("parent").clientWidth;
+    var offsetWidth = window.document.getElementById("parent").offsetWidth;
+    console.log(clientWidth);
+    console.log(offsetWidth);
+  </script>
+</body>
+
+</html>

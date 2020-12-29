@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>requestAnimationFrame</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .content {
+      flex: flex;
+      width: 100%;
+      height: 300px;
+      background-color: lightgray;
+    }
+
+    #ani {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border-radius: 15px;
+      background-color: red;
+      /* transform: translateX(500px); */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <span id="ani"></span>
+  </div>
+  <script>
+    const element = document.getElementById('ani');
+    let start;
+
+    function step(timestamp) {
+      console.log('回调时间：', timestamp)
+      if (start === undefined) {
+        start = timestamp;
+      }
+      const elapsed = (timestamp - start) / 1000;
+
+      //这里使用`Math.min()`确保元素刚好停在200px的位置。
+      element.style.transform = 'translateX(' + Math.min(100 * elapsed, 1200) + 'px)';
+
+      if (elapsed < 12) { // 在10秒后停止动画
+        window.requestAnimationFrame(step);
+      }
+    }
+
+    window.requestAnimationFrame(step);
+  </script>
+</body>
+
+</html>
