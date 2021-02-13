@@ -1,4 +1,3 @@
-// @ts-nocheck
 const obj = new Proxy({}, {
   get: function (target, propKey, receiver) {
     console.log(target, propKey, receiver, `getting ${String(propKey)}!`);
