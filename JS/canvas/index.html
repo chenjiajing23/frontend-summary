@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Line</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+  <script type="text/javascript" src="./index.js"></script>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    //region 1.变换rote
+    const marginBootom = 50;
+    const marginLeft = 40;
+    const canvas = document.getElementById("canvas");
+    //设置画布的宽高
+    canvas.width = 600;
+    canvas.height = 300;
+    //绘制的对象获取
+    const context = canvas.getContext("2d");
+    //渐变
+    context.strokeStyle = "rgb(0,0,0,1)"
+    context.lineWidth = 0.09
+
+    //沿x轴镜像对称变换画布
+    context.scale(1, -1)
+    //向下平移画布-marginBootom的高度
+    context.translate(marginLeft, -canvas.height + marginBootom)
+
+    //绘制XY轴和刻度
+    drawXY(context)
+    //绘制折线和圆
+    drawLine(context)
+    //绘制圆
+    drawCircle(context)
+  </script>
+
+</body>
+
+</html>
